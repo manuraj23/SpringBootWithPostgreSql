@@ -1,6 +1,7 @@
 package com.Manu.SpringBootWithPostgres;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -110,6 +111,22 @@ public class PersonController {
     @GetMapping("/minMarks")
     public ResponseEntity<Long> getMinMarks() {
         return ResponseEntity.ok(personRepo.getMin());
+    }
+
+    //sorting
+    //M1
+    @GetMapping("/sort")
+    public List<Person>getSort(){
+        return personRepo.findAll(Sort.by(Sort.Direction.ASC,"mark"));
+
+
+    }
+    @GetMapping("/sort")
+    public List<Person>getSort(@RequestParam String sortDir, @RequestParam String sortBy){
+        Sort.Direction direction=sortDir.equals("asc")? Sort.Direction.ASC: Sort.Direction.DESC;
+        return personRepo.findAll(Sort.by(direction,sortBy));
+
+
     }
 
 }
