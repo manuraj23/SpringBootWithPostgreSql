@@ -1,6 +1,9 @@
 package com.Manu.SpringBootWithPostgres;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -121,12 +124,21 @@ public class PersonController {
 
 
     }
+    //M2
     @GetMapping("/sort")
     public List<Person>getSort(@RequestParam String sortDir, @RequestParam String sortBy){
         Sort.Direction direction=sortDir.equals("asc")? Sort.Direction.ASC: Sort.Direction.DESC;
         return personRepo.findAll(Sort.by(direction,sortBy));
 
 
+    }
+
+    //pagination
+    @GetMapping("/pagination")
+    public List<Person>getPagination(@RequestParam int pageNo,@RequestParam int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Person> page = personRepo.findAll(pageable);
+        return page.getContent();
     }
 
 }
