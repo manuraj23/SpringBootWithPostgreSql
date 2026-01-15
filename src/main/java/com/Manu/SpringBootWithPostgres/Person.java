@@ -9,6 +9,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //auto increment the value;
     private long id;
+    private long marks;
     private String name;
     private String email;
 }

@@ -1,11 +1,16 @@
 package com.Manu.SpringBootWithPostgres;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonRepo extends JpaRepository<Person, Long> {  //Long is the type of primary key and Person is the entity
+    @Query(value = "SELECT MAX(marks) FROM Table1", nativeQuery = true)
+    public Long getMax();
 
+    @Query(value = "SELECT MIN(marks) FROM Table1", nativeQuery = true)
+    public Long getMin();
 }
 
 

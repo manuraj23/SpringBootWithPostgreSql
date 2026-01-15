@@ -99,4 +99,17 @@ public class PersonController {
         personRepo.deleteAll();
         return ResponseEntity.ok("All persons deleted");
     }
+
+    // ===================== getMax() =====================
+    @GetMapping("/maxMarks")
+    public ResponseEntity<Long> getMaxMarks() {
+        return ResponseEntity.ok(personRepo.getMax());
+    }
+
+    // ===================== getMin() =====================
+    @GetMapping("/minMarks")
+    public ResponseEntity<Long> getMinMarks() {
+        return ResponseEntity.ok(personRepo.getMin());
+    }
+
 }
